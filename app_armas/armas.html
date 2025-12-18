@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Weapon Sounds</title>
+  <style>
+    button {
+      font-size: 20px;
+      padding: 20px;
+      margin: 10px;
+    }
+  </style>
+</head>
+<body>
+
+<h1>Armas Top</h1>
+
+<button onclick="playSound('ak47')"><img src="imagen_armas/ak47.jpg" alt="" width="200px" height="150px"></button>
+<button onclick="playSound('pistola')"><img src="imagen_armas/pistola.jpg" alt="" width="200px" height="150px"></button>
+<button onclick="playSound('bazuka')"><img src="imagen_armas/bazuka.jpg" alt="" width="200px" height="150px"></button>
+<button onclick="playSound('explosivo')"><img src="imagen_armas/c4.jpg" alt="" width="200px" height="150px"></button>
+
+<audio id="ak47" src="sonidos_armas/ak-47-firing-8760.mp3"></audio>
+<audio id="pistola" src="sonidos_armas/gun-fire-346766.mp3"></audio>
+<audio id="bazuka" src="sonidos_armas/bazuca-1-241898.mp3"></audio>
+<audio id="explosivo" src="sonidos_armas/counter-strike-c4-sound.mp3"></audio>
+
+
+<script>
+  function playSound(id) {
+    const sound = document.getElementById(id);
+    sound.currentTime = 0;
+    sound.play();
+  }
+</script>
+
+<script>
+function exportTableToCSV(filename) {
+    var csv = [];
+    var rows = document.querySelectorAll("table tr");
+    
+    for (var i = 0; i < rows.length; i++) {
+        var cols = rows[i].querySelectorAll("td, th");
+        var row = [];
+        for (var j = 0; j < cols.length; j++) {
+            row.push(cols[j].innerText);
+        }
+        csv.push(row.join(","));
+    }
+
+    var csvFile = new Blob([csv.join("\n")], { type: "text/csv" });
+    var downloadLink = document.createElement("a");
+    downloadLink.download = filename;
+    downloadLink.href = window.URL.createObjectURL(csvFile);
+    downloadLink.click();
+}
+</script>
+<button onclick="exportTableToCSV('armas.csv')">Exportar CSV</button>
+
+
+</body>
+</html>
